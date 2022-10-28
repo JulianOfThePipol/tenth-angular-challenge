@@ -1,10 +1,10 @@
 export interface Meta {
-    "current_page"?:number,
-    "from"?: string | null,
-    "last_page"?: number,
-    "per_page"?:number,
-    "to"?: number,
-    "total"?: number
+    "current_page":number,
+    "from": string | null,
+    "last_page": number,
+    "per_page":number,
+    "to": number,
+    "total": number
 }
 
 export interface Filter {
@@ -24,13 +24,20 @@ export interface Filter {
     "reproductions_gteq"?: number,
     "reproductions_lt"?: number,
     "reproductions_lteq"?: number,
-    "reproductions_true"?: number
-    "reproductions_false"?: number
+    "reproductions_true"?: number,
+    "reproductions_false"?: number,
+    "category_id_eq"?: string
 }
 
 export interface Page {
     "size": number,
     "number": number
+}
+
+export interface User {
+    "id" : number,
+    "email":string,
+    "name": string
 }
 
 export interface LoginData {
@@ -41,11 +48,7 @@ export interface LoginData {
 export interface LoginResponse {
     "data" : {
         "token": string,
-        "user": {
-            "id" : number,
-            "email":string,
-            "name": string
-        }
+        "user": User
     }
 }
 
@@ -84,9 +87,16 @@ export interface Product {
 }
 
 export interface Category {
-    "id": number,
+    "id": string,
     "slug": string,
     "name": string
+}
+
+export interface Like {
+    "id": number,
+    "user_id": number,
+    "product_id": number,
+    "kind": number
 }
 
 export interface CartItem {
@@ -126,12 +136,12 @@ export interface SingleProductResponse {
 }
 
 export interface LikeResponse {
-    "data": {
-        "id": number,
-        "user_id": number,
-        "product_id": number,
-        "kind": number
-    }
+    "data": Like
+}
+
+export interface LikesResponse  {
+    "data": Like[],
+    "meta": Meta
 }
 
 export interface CategoriesResponse {

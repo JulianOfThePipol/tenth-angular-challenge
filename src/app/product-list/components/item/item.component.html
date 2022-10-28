@@ -1,0 +1,13 @@
+<mat-card class="product" (click)="openDialog(product)" >
+    <h2 >{{product.name | titlecase}}</h2>
+    <img mat-card-image [src]="product.image?.url" onerror="this.src='assets/imgs/imageNotFound.png'">
+    <mat-card-subtitle>Category: {{product.category?.name | titlecase}}</mat-card-subtitle>
+    <mat-card-content>{{product.description}}</mat-card-content>
+    <mat-card-content class="price">{{product.master?.price | currency:'USD':'symbol'}}</mat-card-content>
+    <mat-card-subtitle *ngIf="product.master?.stock">Currently there are {{product.master?.stock}} items in stock</mat-card-subtitle>
+    <mat-card-subtitle *ngIf="!product.master?.stock" class="no-stock">There is no stock for this item</mat-card-subtitle>
+    <div>
+        <mat-card-subtitle class="like">{{product.likes_up_count}}<mat-icon >thumb_up_alt</mat-icon></mat-card-subtitle>
+        <mat-card-subtitle class="dislike">{{product.likes_down_count}}<mat-icon >thumb_down_alt</mat-icon></mat-card-subtitle>
+    </div>
+</mat-card>

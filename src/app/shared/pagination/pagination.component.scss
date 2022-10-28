@@ -1,0 +1,68 @@
+@import "_variables";
+
+:host{
+    align-self: center;
+}
+
+p{
+    margin: 0;
+}
+
+.pages{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    width: fit-content;
+    align-self: center;
+    border-radius: 15px;
+    text-align: center;
+    vertical-align: center;
+    background-color: $clr-main-light;
+    padding: 0;
+}
+
+.pages__arrows{
+    background-color: $clr-main-light;
+    padding: 0.5em;
+    color: $clr-white;
+}
+
+.pages__dots{
+    background-color: $clr-main-light;
+    cursor: default;
+    padding: 0.4em;
+    color: $clr-white;
+
+}
+
+.pages__page{
+    background-color: $clr-main-lighter;
+    padding-block: 0.5em;
+    padding-inline: 0.7em;  
+    color: $clr-black;
+}
+
+
+.pages__current{
+    background-color: $clr-main-dark;
+    cursor: default;
+    padding-block: 0.5em;
+    padding-inline: 0.7em;  
+    color: $clr-white;
+}
+
+
+.pages__arrows, .pages__page{
+    cursor: pointer;
+}
+
+.pages__arrows:hover, .pages__page:hover{
+    background-color: $clr-main-darkest;
+    color: $clr-white;
+    transform: scale(1.2);
+}
+
+.pages__current:hover{
+    transform: unset!important;
+}

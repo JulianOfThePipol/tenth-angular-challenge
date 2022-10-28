@@ -1,0 +1,26 @@
+@import "_variables.scss";
+
+:host {
+    display: flex;
+    flex-direction: column;
+    margin-block: 1em;
+    gap: 1em;
+    padding-inline: 1em;
+}
+
+.current-category{
+    display: flex;
+    padding-left: 0.5em;
+    padding-block: 0.05em;
+    border-radius: 4px;
+    align-self: flex-start;
+    align-items: center;
+    gap: 1em;
+    background-color: $clr-alternative;
+    box-shadow: 2px 2px 5px rgba(128, 128, 128, 0.539);
+    p{
+        margin: 0;
+        font-size: medium;
+        font-weight: 500;
+    }
+}

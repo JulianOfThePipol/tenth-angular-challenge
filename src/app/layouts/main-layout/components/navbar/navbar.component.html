@@ -1,0 +1,13 @@
+<mat-toolbar color="primary">
+    <h3>Week Ninth's Challenge</h3>
+    <div class="user">
+        <button mat-icon-button (click)="toggleUserInfo()" *ngIf="userData" >{{userData.name[0] | titlecase}}</button>
+        <mat-card *ngIf="userInfoOpened && userData" @topRightScale> 
+            <p class="cross" (click)="toggleUserInfo()">X</p>
+            <h2>{{userData.name}}</h2>
+            <p>{{userData.email}}</p>
+            <button mat-raised-button (click)="logOut()">Log Out</button>
+        </mat-card>
+        <button mat-raised-button *ngIf="!userData" (click)="goToLogin()">Sign in</button>
+    </div>
+</mat-toolbar>

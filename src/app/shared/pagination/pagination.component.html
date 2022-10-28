@@ -1,0 +1,13 @@
+<div class="pages">
+    <p *ngIf="currentPage > 1" class="pages__arrows" (click)="changeCurrentPage(currentPage - 1)"> < </p>
+    <p *ngIf="currentPage > 3" class="pages__dots">⋯</p>
+    <ng-container *ngFor="let page of pagesArray" >
+        <p 
+            *ngIf="page > currentPage - 3 && page < currentPage + 3" 
+            (click)="changeCurrentPage(page)"
+            [ngClass]="currentPage === page ? 'pages__current' : 'pages__page'"
+        >{{page}}</p>
+    </ng-container>
+    <p *ngIf="currentPage < pagesArray.length -2" class="pages__dots">⋯</p>
+    <p *ngIf="currentPage < pagesArray.length" class="pages__arrows" (click)="changeCurrentPage(currentPage + 1)"> > </p>
+</div>

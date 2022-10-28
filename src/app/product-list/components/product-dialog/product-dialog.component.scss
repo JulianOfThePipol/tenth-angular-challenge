@@ -1,0 +1,56 @@
+
+
+img{
+    object-fit: contain;
+    width: 95%;
+    max-height: 20em;
+    min-height: 10em;
+    align-self: center;
+}
+
+mat-card{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    max-height: 45em;
+    border-radius: 4px;
+    box-shadow: none !important;
+    overflow-x: hidden;
+    h2 {
+        width: max-content;
+        max-width: 100%;
+        text-overflow: ellipsis;
+        overflow-x: hidden;
+        white-space: nowrap;
+
+    }
+    div{
+        align-self: flex-end;
+        display: flex;
+        align-items: center;
+        gap: 1em;
+        mat-card-subtitle{
+            display: flex;
+            align-items: center;
+            gap: 2px;
+        }
+    }
+}
+
+.price {
+    font-size: x-large;
+    font-weight: 600;
+}
+
+.no-stock {
+    color: lightcoral;
+}
+
+.like {
+    color: green;
+}
+
+.dislike{
+    color: red;
+    padding-top: 4px;
+}

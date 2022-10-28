@@ -1,0 +1,88 @@
+@import "_variables.scss";
+:host{
+    display: block;
+    width: 100%;
+    padding:0.1em;
+}
+
+img{
+    object-fit: contain;
+    width: 95%;
+    max-height: 20em;
+    min-height: 10em;
+    align-self: center;
+}
+
+mat-card{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    max-height: 45em;
+    border-radius: 4px;
+    transition: all 200ms ease-in-out;
+    box-shadow: 2px 2px 5px grey;
+    overflow-x: hidden;
+    h2 {
+        width: max-content;
+        max-width: 100%;
+        text-overflow: ellipsis;
+        overflow-x: hidden;
+        white-space: nowrap;
+
+    }
+    div{
+        align-self: flex-end;
+        display: flex;
+        align-items: center;
+        gap: 1em;
+        mat-card-subtitle{
+            display: flex;
+            align-items: center;
+            gap: 2px;
+        }
+    }
+}
+
+mat-card:hover{
+    cursor: pointer;
+    background-color: rgb(210, 210, 210);
+}
+
+.price {
+    font-size: x-large;
+    font-weight: 600;
+}
+
+.no-stock {
+    color: lightcoral;
+}
+
+.like {
+    color: green;
+}
+
+.dislike{
+    color: red;
+    padding-top: 4px;
+}
+
+
+@media (min-width:320px) {
+    :host{
+        padding-inline: 2em;
+    }
+}
+
+@media (min-width:469px) {
+    :host{
+        padding-inline: 0;
+        width: 20em;
+        margin: 0.1em;
+    }
+}
+
+@media (min-width:850px) {
+    :host{
+        width: 20em;
+    }
+}

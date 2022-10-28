@@ -1,0 +1,7 @@
+<div class="container">
+    <button mat-icon-button color="primary" *ngIf="currentPage !== 1" (click)="changeCurrent(currentPage-1)" class="arrow"><mat-icon>arrow_back_ios</mat-icon></button>
+    <div class="chip-container">
+        <button mat-raised-button *ngFor="let category of currentCategories" id="category.id" (click)="emitCategory(category)" color="primary">{{category.name}}</button>
+    </div>
+    <button mat-icon-button *ngIf="currentPage !== 6" (click)="changeCurrent(currentPage+1)" class="arrow"><mat-icon>arrow_forward_ios</mat-icon></button>
+</div>

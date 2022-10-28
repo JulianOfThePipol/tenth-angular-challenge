@@ -1,0 +1,5 @@
+<mat-form-field>
+    <mat-label>Search:</mat-label>
+    <input matInput autocomplete="off" name="search" #search (keyup.enter)="emitSearch(search.value)" >
+    <mat-icon matSuffix (click)="emitSearch(search.value)">search</mat-icon>
+</mat-form-field>

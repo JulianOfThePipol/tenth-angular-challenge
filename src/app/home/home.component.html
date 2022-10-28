@@ -1,1 +1,12 @@
-<p>home works!</p>
+
+<app-categories (categoryEmitter)="changeCategory($event)" [currentCategory]="currentCategory"></app-categories>
+<app-search (searchEmitter)="changeSearch($event)"></app-search>
+<div class="current-category" *ngIf="currentCategory">
+    <p>Filtering by: {{currentCategory.name}}</p>
+    <button mat-raised-button color="accent" (click)="changeCategory(null)">Clear Filter</button>
+</div>
+<h3 *ngIf="totalPages === 0 && currentSearch">There are no results for this search</h3>
+<h3 *ngIf="totalPages === 0 && !currentSearch">There are no items in this category</h3>
+
+<app-product-list [products]="currentProducts" ></app-product-list>
+<app-pagination [currentPage]="currentPage" [pages]="totalPages" (currentPageEmitter)="changePage($event)" *ngIf="totalPages > 1"></app-pagination>

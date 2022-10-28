@@ -13,6 +13,7 @@ body {
   padding: 0;
 }
 
+
 *,
 *::before,
 *::after {
@@ -22,6 +23,7 @@ body {
 html {
   scroll-behavior: smooth;
   font-family: 'Nunito Sans', sans-serif;
+  background-color: #ededed;
 }
 
 ::-webkit-scrollbar {
