@@ -26,7 +26,6 @@ export class ErrorHandlerService implements ErrorHandler {
       }
     } else {
       this.snackBar.openSnackBarWarning('An error has ocurred, please try again')
-      console.log(error)
     }
   } 
 } 

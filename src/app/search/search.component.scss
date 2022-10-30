@@ -9,12 +9,13 @@
 
 mat-icon{
     cursor: pointer;
+    margin-bottom: -5px;
 }
 
 mat-form-field{
     width: 100%;
-   
-    padding: 0.3em;
+    padding-top: 0.2em;
+    
     
     input{
         width: 100%;

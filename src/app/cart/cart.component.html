@@ -1,6 +1,9 @@
-<h1>Your Cart</h1>
+<div class="to-home"><button mat-mini-fab (click)="goToHome()"><mat-icon>home</mat-icon></button></div>
 
-<div class="table-wrapper">
+<h1>Your Cart</h1>
+<h2 *ngIf="cart.total <= 0">There are no products in your cart!</h2>
+
+<div class="table-wrapper" *ngIf="cart.total > 0">
     <table mat-table [dataSource]="cart.items">
         <ng-container matColumnDef="quantity">
             <th mat-header-cell *matHeaderCellDef> Quantity </th>
@@ -43,8 +46,8 @@
     </table>
 </div>
 
-<div class="totals">
-    <h3>Total: {{cart.total}}</h3>
+<div class="totals" *ngIf="cart.total > 0">
     <h3>Products: {{itemsAmount}}</h3>
-    <button mat-raised-button color="primary">Buy Items</button>
+    <h3>Total: {{cart.total}}</h3>
+    <button mat-raised-button color="primary" (click)="buyCart()">Buy Items</button>
 </div>

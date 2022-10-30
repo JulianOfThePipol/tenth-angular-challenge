@@ -1,5 +1,8 @@
+import { HttpHandler, HttpErrorResponse } from '@angular/common/http';
+import { TokenService } from './../core/services/token.service';
+import { Router } from '@angular/router';
 import { LoginRestService } from './login-rest.service';
-import { Component } from '@angular/core';
+import { Component, ErrorHandler } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 
 
@@ -10,7 +13,7 @@ import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/fo
 })
 export class LoginComponent {
   passwordShown = false;
-
+  loading = false;
   loginForm = new FormGroup ({
     email: new FormControl('', [
       Validators.required,
@@ -33,16 +36,34 @@ export class LoginComponent {
 
   constructor (
     private restService: LoginRestService,
+    private tokenService: TokenService,
+    private router: Router
   ) {}
 
   onSubmit ():void {
+    this.loading = true
      this.restService.loginUser({
       "email": this.email?.value as string,
       "password": this.password?.value as string
-    }); 
+    }).subscribe({
+      next: (response) => {
+        this.tokenService.setToken(response.data.token)
+        localStorage.setItem('user', JSON.stringify(response.data.user))
+        this.goToHome();
+      },
+      error: (error) => {
+        this.loading = false
+        throw new HttpErrorResponse(error)
+      }
+    });
   };
 
   toggleVisibility ():void {
     this.passwordShown= !this.passwordShown;
   };
+
+    
+  goToHome() {
+    this.router.navigate(['main']);
+  }
 }

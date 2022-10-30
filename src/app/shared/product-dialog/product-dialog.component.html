@@ -7,11 +7,11 @@
     <mat-card-subtitle *ngIf="product.master.stock">Currently there are {{product.master.stock}} items in stock</mat-card-subtitle>
     <mat-card-subtitle *ngIf="!product.master.stock && !cartItem" class="no-stock">There is no stock for this item</mat-card-subtitle>
     <div>
-        <mat-card-subtitle class="like">{{product.likes_up_count}}
+        <mat-card-subtitle class="like">
             <mat-icon class="rateClicked" *ngIf="likeState === 1">thumb_up_alt</mat-icon>
             <mat-icon *ngIf="likeState !== 1" class="rate" (click)="rateProduct('up')">thumb_up_alt</mat-icon>
         </mat-card-subtitle>
-        <mat-card-subtitle class="dislike">{{product.likes_down_count}}
+        <mat-card-subtitle class="dislike">
             <mat-icon class="rateClicked" *ngIf="likeState === 0">thumb_down_alt</mat-icon>
             <mat-icon *ngIf="likeState !== 0" class="rate" (click)="rateProduct('down')">thumb_down_alt</mat-icon>
         </mat-card-subtitle>

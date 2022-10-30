@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { CartService } from './../shared/services/cart.service';
 import { NoopScrollStrategy } from '@angular/cdk/overlay';
 import { ProductDialogComponent } from './../shared/product-dialog/product-dialog.component';
@@ -28,7 +29,8 @@ export class CartComponent implements OnInit {
     private cartStore: Store<Cart>,
     private restService:GlobalRestService,
     public dialog: MatDialog,
-    private cartService: CartService
+    private cartService: CartService,
+    private router : Router
   ) { }
 
   ngOnInit(): void {
@@ -42,11 +44,11 @@ export class CartComponent implements OnInit {
   }
 
   seeProduct(product_id:number) {
-    console.log(product_id)
     this.restService.getSingleProductWithId(product_id as number).subscribe({
       next: response => this.openDialog(response.data[0])
     })
   }
+
   openDialog(data: Product): void {
     const dialogRef = this.dialog.open(ProductDialogComponent, {
       data: data,
@@ -56,5 +58,13 @@ export class CartComponent implements OnInit {
 
   removeProduct(product_id:number) {
     this.cartService.removeItemFromCart(product_id,this.cart.items.length)
+  }
+
+  buyCart() {
+    this.cartService.finishCartFlow()
+  }
+
+  goToHome () {
+    this.router.navigate(["/main"])
   }
 }

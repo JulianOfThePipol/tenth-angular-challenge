@@ -9,21 +9,11 @@ export class LoginRestService {
 
   constructor(
     private globalRest: GlobalRestService,
-    private tokenService: TokenService,
-    private router: Router
+
   ) { }
 
   loginUser(userData: LoginData) {
-    return this.globalRest.login(userData).subscribe({
-      next: (response) => {
-        this.tokenService.setToken(response.data.token)
-        localStorage.setItem('user', JSON.stringify(response.data.user))
-        this.goToHome();
-      }
-    });
+    return this.globalRest.login(userData)
   }
 
-  goToHome() {
-    this.router.navigate(['main']);
-  }
 }

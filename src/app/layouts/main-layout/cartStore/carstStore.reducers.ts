@@ -1,4 +1,4 @@
-import { setCart, addItem, addFirstItem, changeItemQuantity, removeItem, deleteCart } from './cartStore.actions';
+import { setCart, addItem, addFirstItem, changeItemQuantity, removeItem, deleteCart, buyCart } from './cartStore.actions';
 import { Cart } from './../../../models/rest.models';
 import {
   ActionReducer,
@@ -74,7 +74,7 @@ export const cartReducers = createReducer(
     }
   }),
 
-  on(deleteCart, () => {
+  on(deleteCart, buyCart, () => {
       return initialState
   })
 )

@@ -1,7 +1,7 @@
 import { cartFromStore } from './../../layouts/main-layout/cartStore/cartStore.selectors';
 import { Cart } from './../../models/rest.models';
 import { Store } from '@ngrx/store';
-import { addItem, changeItemQuantity, deleteCart, removeItem } from './../../layouts/main-layout/cartStore/cartStore.actions';
+import { addItem, changeItemQuantity, deleteCart, removeItem, buyCart } from './../../layouts/main-layout/cartStore/cartStore.actions';
 import { GlobalRestService } from './../../core/services/global-rest.service';
 import { Injectable, OnInit } from '@angular/core';
 import { addFirstItem } from 'src/app/layouts/main-layout/cartStore/cartStore.actions';
@@ -55,17 +55,26 @@ export class CartService {
   }
 
   removeItemFromCart (cartItemId: number, itemsLength: number):void {
+    this.getState()
     if (itemsLength > 1) {
       this.cartStore.dispatch(removeItem({ 
         cartItemId:cartItemId,
         previousState: this.snapshot }))
     } else {
-      this.cartStore.dispatch(deleteCart({previousState: this.snapshot}))
+      this.removeCart()
     }
   }
 
+  finishCartFlow ():void {
+    this.getState()
+    this.cartStore.dispatch(buyCart({previousState: this.snapshot}))
+  }
 
-  getState () {
+  removeCart():void {
+    this.cartStore.dispatch(deleteCart({previousState: this.snapshot}))
+  }
+
+  getState ():void {
     this.cartStore.select(cartFromStore).subscribe(s => this.snapshot = s);
   }
 }

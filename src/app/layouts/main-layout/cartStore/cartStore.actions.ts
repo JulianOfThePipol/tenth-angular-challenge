@@ -30,3 +30,8 @@ export const deleteCart = createAction (
     "[Cart Remove] Remove Cart",
     props<{ previousState: Cart}> ()
 )
+
+export const buyCart = createAction(
+    "[Cart Buy] Buy Cart",
+    props<{ previousState: Cart}> ()
+)

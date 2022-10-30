@@ -29,7 +29,7 @@
             <mat-error *ngIf="password?.errors?.['required']">Password is required</mat-error>
         </mat-form-field>
         <div mat-dialog-actions >
-            <button mat-raised-button color="primary" type="submit" [disabled]="!loginForm.valid">Submit</button>
+            <button mat-raised-button color="primary" type="submit" [disabled]="!loginForm.valid || loading">Submit</button>
         </div>
     </form>
 </div>

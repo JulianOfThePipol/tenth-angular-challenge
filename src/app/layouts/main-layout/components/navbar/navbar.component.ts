@@ -2,7 +2,7 @@ import { User } from './../../../../models/rest.models';
 import { Router } from '@angular/router';
 import { TokenService } from './../../../../core/services/token.service';
 import { Animations } from './../../../../../assets/animations/animations';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, HostListener, ElementRef } from '@angular/core';
 
 @Component({
   selector: 'app-navbar',
@@ -14,7 +14,19 @@ export class NavbarComponent implements OnInit {
   userInfoOpened = false;
   userData: User | null = null;
   @Input() itemsAmount = 0;
-  constructor(private router: Router, private tokenService: TokenService) {}
+
+  @HostListener('document:click', ['$event'])
+  clickout(event:Event) {
+    if(!this.eRef.nativeElement.contains(event.target)) {
+      this.userInfoOpened = false;
+    }
+  }
+
+
+  constructor(
+    private router: Router, 
+    private tokenService: TokenService,
+    private eRef: ElementRef) {}
 
   ngOnInit (): void {
     if (localStorage.getItem('user')) {

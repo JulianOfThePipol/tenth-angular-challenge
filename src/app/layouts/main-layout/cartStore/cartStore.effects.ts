@@ -1,9 +1,8 @@
-import { cartFromStore } from './cartStore.selectors';
-import { Store } from '@ngrx/store';
+import { HttpErrorResponse } from '@angular/common/http';
 import { SnackbarService } from './../../../shared/services/snackbar.service';
 import { GlobalRestService } from './../../../core/services/global-rest.service';
 import { Injectable } from '@angular/core';
-import { act, Actions, createEffect, ofType } from '@ngrx/effects';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
 import {
   addItem,
   addFirstItem,
@@ -11,6 +10,7 @@ import {
   changeItemQuantity,
   removeItem,
   deleteCart,
+  buyCart,
 } from './cartStore.actions';
 import {
   concatMap,
@@ -19,8 +19,6 @@ import {
   throwError,
   tap,
   of,
-  take,
-  Observable,
 } from 'rxjs';
 import { Cart } from 'src/app/models/rest.models';
 
@@ -77,7 +75,6 @@ export class CartEffects {
         );
       }),
       map((response) => {
-        console.log(this.snapshot);
         this.snackBarService.openSnackBarSuccess(
           'Item Quantity Modified Succesfully'
         );
@@ -138,7 +135,27 @@ export class CartEffects {
       ),
     { dispatch: false }
   );
-
+  
+  buyCart$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(buyCart),
+        concatMap((action) => {
+          this.snapshot = action.previousState;
+          return this.restService.deleteCart();
+        }),
+        tap((response) => {
+          this.snackBarService.openSnackBarSuccess(
+            'Order went through succesfully, thanks for your purchase!'
+          );
+        }),
+        catchError((error) => {
+          new HttpErrorResponse(error)
+          return of(setCart({ cart: this.snapshot }));
+        })
+      ),
+    { dispatch: false }
+  );
   snapshot!: Cart;
   constructor(
     private actions$: Actions,
