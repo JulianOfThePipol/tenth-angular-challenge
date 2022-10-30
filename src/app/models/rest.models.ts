@@ -62,12 +62,12 @@ export interface Product {
     "likes_up_count": number,
     "likes_down_count": number,
     "published_at": string
-    "master"?: {
+    "master": {
         "id": number,
         "sku": string,
         "price": string,
         "promotional_price": string,
-        "stock": string,
+        "stock": number,
         "weight": string,
         "height": string,
         "width": string,
@@ -96,31 +96,36 @@ export interface Like {
     "id": number,
     "user_id": number,
     "product_id": number,
-    "kind": number
+    "kind": -1 | 0 | 1
 }
+
+
 
 export interface CartItem {
-    "id": number,
+    "id"?: number,
     "quantity": number,
     "product_variant_id": number,
-    "product_id": number,
-    "order_id": number,
-    "total": string,
-    "price": string,
-    "name": string,
-    "description": string,
-    "promotion": number
+    "product_id"?: number,
+    "order_id"?: number,
+    "total"?: string,
+    "price"?: string,
+    "name"?: string,
+    "description"?: string,
+    "promotion"?: number,
+    "image_url"?: string
 }
 
+
+
 export interface Cart {
-    "id": number,
-    "user_id": number,
-    "number": number,
-    "status": string,
-    "total": string,
-    "total_items": string,
-    "completed_at": null | string,
-    "created_at": string,
+    "id"?: number,
+    "user_id"?: number,
+    "number"?: number,
+    "status"?: string,
+    "total": number,
+    "total_items": number,
+    "completed_at"?: null | string,
+    "created_at"?: string,
     "items": CartItem[]
 }
 
@@ -135,9 +140,6 @@ export interface SingleProductResponse {
     "meta": Meta
 }
 
-export interface LikeResponse {
-    "data": Like
-}
 
 export interface LikesResponse  {
     "data": Like[],
@@ -160,6 +162,7 @@ export interface CartResponse {
 }
 
 export interface CartPostItem {
+    "id"?:number,
     "product_variant_id": number,
     "quantity": number
 }

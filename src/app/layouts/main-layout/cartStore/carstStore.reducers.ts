@@ -1,4 +1,4 @@
-import { setCart } from './cartStore.actions';
+import { setCart, addItem, addFirstItem, changeItemQuantity, removeItem, deleteCart } from './cartStore.actions';
 import { Cart } from './../../../models/rest.models';
 import {
   ActionReducer,
@@ -17,9 +17,9 @@ const initialState: Cart = {
   id: 0,
   user_id: 0,
   number: 0,
-  total_items: "0",
+  total_items: 0,
   status: "",
-  total: "",
+  total: 0,
   created_at: "",
   completed_at:"",
   items: []
@@ -28,6 +28,9 @@ const initialState: Cart = {
 export const cartReducers = createReducer(
   initialState,
   on(setCart, (state, payload) => {
+    if (payload.cart === null) {
+      return initialState
+    }
     return {...state, 
       id: payload.cart.id,
       user_id: payload.cart.user_id,
@@ -39,7 +42,41 @@ export const cartReducers = createReducer(
       completed_at:payload.cart.completed_at,
       items: payload.cart.items
     }
-  }) 
+  }), 
+
+  on(addItem, addFirstItem, (state, payload) => {
+    let items = state.items.slice(0);
+    items.push(payload.item)
+    return {...state,
+      items: items
+    }
+  }),
+
+  on(changeItemQuantity, (state, payload) => {
+    let items = state.items.slice(0);
+    let currentIndex = items.findIndex(function(item) {
+      return item.product_variant_id === payload.item.product_variant_id
+    })
+    items[currentIndex] = payload.item
+    return {...state,
+      items: items
+    }
+  }),
+
+  on(removeItem, (state, payload) => {
+    let items = state.items.slice(0);
+    let currentIndex = items.findIndex(function(item) {
+      return item.id === payload.cartItemId
+    });
+    items.splice(currentIndex, 1)
+    return {...state,
+      items: items
+    }
+  }),
+
+  on(deleteCart, () => {
+      return initialState
+  })
 )
 
 

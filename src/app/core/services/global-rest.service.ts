@@ -2,9 +2,7 @@ import {
   LoginResponse,
   LoginData,
   ProductsResponse,
-  Filter,
   SingleProductResponse,
-  LikeResponse,
   CategoriesResponse,
   SingleCategoryResponse,
   CartResponse,
@@ -58,7 +56,7 @@ export class GlobalRestService {
       category_id_eq: category_id,
     }; */
 
-    return this.http.get<ProductsResponse>(`${this.url}/products?include=master,category,image_attachment.blob&[page][size]=${itemPerPage}&[page][number]=${page}&[filter][name_cont]=${search}&[filter][category_id_eq]=${category_id}`);
+    return this.http.get<ProductsResponse>(`${this.url}/products?include=master,category,image_attachment.blob&[page][size]=${itemPerPage}&[page][number]=${page}&[filter][name_cont]=${search}&[filter][category_id_eq]=${category_id}&sort=name asc`);
   }
 
   getSingleProduct(productSlug: string): Observable<SingleProductResponse> {
@@ -67,11 +65,17 @@ export class GlobalRestService {
     );
   }
 
+  getSingleProductWithId(productId: number): Observable<ProductsResponse> {
+    return this.http.get<ProductsResponse>(
+      `${this.url}/products?include=master,category,image_attachment.blob&[filter][id_eq]=${productId}`
+    )
+  }
+
   rateProduct(
     kind: 'up' | 'down',
     product_id: number
-  ): Observable<LikeResponse> {
-    return this.http.post<LikeResponse>(`${this.url}/likes`, {
+  ): Observable<LikesResponse> {
+    return this.http.post<LikesResponse>(`${this.url}/likes`, {
       data: {
         product_id: product_id,
         kind: kind,
@@ -79,7 +83,7 @@ export class GlobalRestService {
     });
   }
 
-  getProductLiked (user_id: string, product_id: string): Observable<LikesResponse> {
+  getProductLiked (user_id: number, product_id: number): Observable<LikesResponse> {
     return this.http.get<LikesResponse> (`${this.url}/likes?[filter][user_id_eq]=${user_id}&[filter][product_id_eq]=${product_id}`)
   }
 
@@ -102,6 +106,37 @@ export class GlobalRestService {
   uploadCart(cartItems: CartPostItem[]): Observable<CartResponse> {
     return this.http.post<CartResponse>(`${this.url}/cart`, {
       data: { items: cartItems },
+    });
+  }
+
+  addNewItemToCart(cartItems: CartPostItem[]): Observable<CartResponse> {
+    return this.http.put<CartResponse>(`${this.url}/cart`, {
+      data: { items: cartItems },
+    });
+  }
+
+  changeItemQuantityCart(cartItems: CartPostItem, id: number): Observable<CartResponse> {
+    return this.http.put<CartResponse>(`${this.url}/cart`, {
+      data: { items: [
+        {
+          _destroy: true,
+          id: id
+        },
+        {
+        product_variant_id: cartItems.product_variant_id,
+        quantity: cartItems.quantity
+      }] },
+    });
+  }
+
+  removeItemCart(id: number): Observable<CartResponse> {
+    return this.http.put<CartResponse>(`${this.url}/cart`, {
+      data: { items: [
+        {
+          _destroy: true,
+          id: id
+        }
+     ]},
     });
   }
 

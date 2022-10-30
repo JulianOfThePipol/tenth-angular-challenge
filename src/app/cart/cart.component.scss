@@ -1,0 +1,49 @@
+:host {
+    padding: 1em;
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+}
+
+table{
+    width: 100%;
+    min-width: 40em;
+}
+
+.table-wrapper {
+    overflow-x: auto;
+}
+
+button{
+    right: 0;
+    margin-left: auto;
+    text-align: right;
+}
+
+.mat-column-id{
+    width: 10em;
+}
+
+.mat-column-cross{
+    width: 3em;
+    text-align: center;
+    button{
+        color: black;
+        text-align: center;
+
+    }
+}
+
+.totals{
+    align-self: center;
+    display: flex;
+    gap: 0.5em;
+    align-items: center;
+    padding: 0.5em;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 2px 2px 5px rgba(128, 128, 128, 0.503);
+    h2,h3{
+        margin: 0;
+    }
+}

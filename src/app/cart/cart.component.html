@@ -1,1 +1,50 @@
-<p>cart works!</p>
+<h1>Your Cart</h1>
+
+<div class="table-wrapper">
+    <table mat-table [dataSource]="cart.items">
+        <ng-container matColumnDef="quantity">
+            <th mat-header-cell *matHeaderCellDef> Quantity </th>
+            <td mat-cell *matCellDef="let element"> {{element.quantity}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef> Name </th>
+            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+        </ng-container>
+        
+        <ng-container matColumnDef="description">
+            <th mat-header-cell *matHeaderCellDef> Description </th>
+            <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+        </ng-container>
+        
+        <ng-container matColumnDef="price">
+            <th mat-header-cell *matHeaderCellDef> Price </th>
+            <td mat-cell *matCellDef="let element"> {{element.price}} </td>
+        </ng-container>
+        
+        <ng-container matColumnDef="total">
+            <th mat-header-cell *matHeaderCellDef> Total </th>
+            <td mat-cell *matCellDef="let element"> {{element.total}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef> </th>
+            <td mat-cell *matCellDef="let element"> <button mat-flat-button color="accent" (click)="seeProduct(element.product_variant_id)">See Product</button></td>
+        </ng-container>
+
+        <ng-container matColumnDef="cross">
+            <th mat-header-cell *matHeaderCellDef> </th>
+            <td mat-cell *matCellDef="let element"> <button mat-mini-fab color="warn" (click)="removeProduct(element.id)"><mat-icon>delete</mat-icon></button></td>
+        </ng-container>
+        
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+</div>
+
+<div class="totals">
+    <h3>Total: {{cart.total}}</h3>
+    <h3>Products: {{itemsAmount}}</h3>
+    <button mat-raised-button color="primary">Buy Items</button>
+</div>

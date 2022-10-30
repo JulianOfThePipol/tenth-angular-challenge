@@ -17,8 +17,10 @@ export class MainRestService {
   getCart () {
     this.restService.getCart().subscribe({
       next: response => {
-        console.log("cart",response)
         this.cartStore.dispatch(setCart({cart:response.data}))
+      },
+      error: error => {
+        this.cartStore.dispatch(setCart({cart:null}))
       }
     })
   }

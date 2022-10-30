@@ -13,6 +13,12 @@ const routes: Routes = [
         loadChildren: () =>
           import('../../home/home.module').then((mod) => mod.HomeModule),
       },
+      {
+        path: 'cart',
+        pathMatch: 'full',
+        loadChildren: () =>
+          import('../../cart/cart.module').then((mod) => mod.CartModule),
+      }
     ],
   },
 ];

@@ -1,0 +1,42 @@
+<mat-card class="product">
+    <h2 >{{product.name | titlecase}}</h2>
+    <img mat-card-image [src]="product.image?.url" onerror="this.src='assets/imgs/imageNotFound.png'">
+    <mat-card-subtitle>Category: {{product.category?.name | titlecase}}</mat-card-subtitle>
+    <mat-card-content>{{product.description}}</mat-card-content>
+    <mat-card-content class="price">{{product.master.price | currency:'USD':'symbol'}}</mat-card-content>
+    <mat-card-subtitle *ngIf="product.master.stock">Currently there are {{product.master.stock}} items in stock</mat-card-subtitle>
+    <mat-card-subtitle *ngIf="!product.master.stock && !cartItem" class="no-stock">There is no stock for this item</mat-card-subtitle>
+    <div>
+        <mat-card-subtitle class="like">{{product.likes_up_count}}
+            <mat-icon class="rateClicked" *ngIf="likeState === 1">thumb_up_alt</mat-icon>
+            <mat-icon *ngIf="likeState !== 1" class="rate" (click)="rateProduct('up')">thumb_up_alt</mat-icon>
+        </mat-card-subtitle>
+        <mat-card-subtitle class="dislike">{{product.likes_down_count}}
+            <mat-icon class="rateClicked" *ngIf="likeState === 0">thumb_down_alt</mat-icon>
+            <mat-icon *ngIf="likeState !== 0" class="rate" (click)="rateProduct('down')">thumb_down_alt</mat-icon>
+        </mat-card-subtitle>
+    </div>
+    <mat-card-actions *ngIf="product.master.stock  > 0 || cartItem">
+        <form #itemForm="ngForm" >
+            <div *ngIf="product.master.stock">
+                <mat-form-field>
+                    <mat-label>Add: </mat-label>
+                    <input matInput [max]="product.master.stock  - (cartItem?.quantity || 0)  " type="number" min=1 name="addAmount" ngModel required #addAmount="ngModel">
+                    <mat-error *ngIf="addAmount.errors?.['min'] || addAmount.errors?.['required']">Add at least one item</mat-error>
+                    <mat-error *ngIf="addAmount.errors?.['max']">Exceeded stock amount</mat-error>
+                </mat-form-field>
+                <button mat-raised-button color="primary" type="submit" [disabled]="addAmount.errors" (click)="addItemToCart(addAmount.value)">Add Item/s</button>
+            </div>
+            <div *ngIf="cartItem">
+                <mat-form-field>
+                    <mat-label>Remove: </mat-label>
+                    <input matInput [max]="cartItem.quantity" type="number" min=1 name="removeAmount" ngModel required #removeAmount="ngModel">
+                    <mat-error *ngIf="removeAmount.errors?.['min'] || removeAmount.errors?.['required']">Add at least one item</mat-error>
+                    <mat-error *ngIf="removeAmount.errors?.['max']">Exceeded stock amount</mat-error>
+                </mat-form-field>
+                <button mat-raised-button color="primary" type="submit" [disabled]="removeAmount.errors" (click)="removeItemsFromCart(removeAmount.value)">Remove {{removeAmount.value}} Item/s</button>
+            </div>
+        </form>
+        <p *ngIf="cartItem" class="current-amount">You currently have {{cartItem.quantity}} in your cart</p>
+    </mat-card-actions>
+</mat-card>

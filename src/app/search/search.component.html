@@ -1,5 +1,7 @@
-<mat-form-field>
+<mat-form-field >
     <mat-label>Search:</mat-label>
-    <input matInput autocomplete="off" name="search" #search (keyup.enter)="emitSearch(search.value)" >
-    <mat-icon matSuffix (click)="emitSearch(search.value)">search</mat-icon>
+    <input matInput autocomplete="off" name="search" #search (keyup.enter)="emitSearch(search.value)" [value]="searchValue">
+    <mat-icon matPrefix (click)="emitSearch(search.value)">search</mat-icon>
+    <mat-icon matSuffix (click)="search.value=''; emitSearch('')" aria-label="Clear" *ngIf="searchValue">clear</mat-icon>
+    
 </mat-form-field>

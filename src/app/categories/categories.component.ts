@@ -16,7 +16,6 @@ export class CategoriesComponent implements OnInit {
   @Output() categoryEmitter = new EventEmitter<Category>();
   @Input() currentCategory! : Category | null;
 
-  categories$!: Observable<Category[]>
   categories: Category[] = [];
   currentCategories: Category[] = [];
   currentPage = 1
@@ -26,11 +25,9 @@ export class CategoriesComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.categories$ = this.categoriesStore.pipe(
+    this.categoriesStore.pipe(
       select(categoriesFromStore)
-    )
-
-    this.categories$.subscribe({
+    ).subscribe({
       next: value => {
         this.categories = value;
         this.changeCurrent(1)

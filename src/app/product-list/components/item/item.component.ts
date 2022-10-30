@@ -1,6 +1,6 @@
+import { ProductDialogComponent } from './../../../shared/product-dialog/product-dialog.component';
 import { Product } from '../../../models/rest.models';
 import { Component, OnInit, Input } from '@angular/core';
-import { ProductDialogComponent } from '../product-dialog/product-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { NoopScrollStrategy } from '@angular/cdk/overlay';
 @Component({
@@ -15,11 +15,10 @@ export class ItemComponent implements OnInit {
 
   ngOnInit(): void {}
 
-
-    openDialog(data: Product): void {
+  openDialog(data: Product): void {
     const dialogRef = this.dialog.open(ProductDialogComponent, {
       data: data,
-      scrollStrategy: new NoopScrollStrategy()
+      scrollStrategy: new NoopScrollStrategy(),
     });
   }
 }

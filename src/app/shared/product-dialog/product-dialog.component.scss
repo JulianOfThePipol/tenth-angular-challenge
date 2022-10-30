@@ -16,12 +16,14 @@ mat-card{
     border-radius: 4px;
     box-shadow: none !important;
     overflow-x: hidden;
+    overflow-y: auto;
     h2 {
         width: max-content;
         max-width: 100%;
         text-overflow: ellipsis;
         overflow-x: hidden;
         white-space: nowrap;
+        overflow-y: hidden;
 
     }
     div{
@@ -32,7 +34,7 @@ mat-card{
         mat-card-subtitle{
             display: flex;
             align-items: center;
-            gap: 2px;
+            gap: 4px;
         }
     }
 }
@@ -40,6 +42,10 @@ mat-card{
 .price {
     font-size: x-large;
     font-weight: 600;
+}
+
+.current-amount{
+    margin-top: 0.7em;
 }
 
 .no-stock {
@@ -53,4 +59,46 @@ mat-card{
 .dislike{
     color: red;
     padding-top: 4px;
+}
+
+.rate {
+    cursor: pointer;
+}
+
+.rateClicked{
+    background-color: rgba(128, 128, 128, 0.559);
+    border-radius: 5px;
+    box-shadow: 0px 0px 2px 1px rgba(128, 128, 128, 0.559);
+}
+
+mat-card-actions {
+    align-self: flex-end;
+}
+
+form{
+
+    div{
+        display: flex;
+        align-items: center;
+    }
+}
+
+mat-form-field{
+    max-width: 6em;
+}
+
+@media(min-width:400px) {
+    mat-form-field{
+        max-width: 8em;
+    } 
+}
+
+
+@media(min-width:769px) {
+    form{
+        display: flex;
+    }
+    mat-form-field{
+        max-width: 10em;
+    } 
 }

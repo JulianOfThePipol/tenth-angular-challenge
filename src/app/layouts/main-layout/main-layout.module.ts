@@ -1,3 +1,5 @@
+import { EffectsModule } from '@ngrx/effects';
+import { CartEffects } from './cartStore/cartStore.effects';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MainRoutingModule } from './main-layout.routing';
@@ -23,8 +25,9 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     MainRoutingModule,
     StoreModule.forFeature(
       fromCart.cartFeatureKey, 
-      fromCart.cartReducers),
-
+      fromCart.cartReducers
+      ),
+    EffectsModule.forFeature([CartEffects]),
     MatToolbarModule,
     MatButtonModule,
     MatCardModule,

@@ -1,7 +1,28 @@
 :host{
     align-self: center;
+    width: 80%;
+    padding-inline: 0.5em;
+    background-color: white;
+    border-radius: 6px;
+    max-width: 50em;
 }
 
 mat-icon{
     cursor: pointer;
+}
+
+mat-form-field{
+    width: 100%;
+   
+    padding: 0.3em;
+    
+    input{
+        width: 100%;
+    }
+}
+
+@media (min-width:769px) {
+    :host{
+        width: 50%;
+    }
 }

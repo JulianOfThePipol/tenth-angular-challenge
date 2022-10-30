@@ -1,4 +1,3 @@
-import { MainGuard } from './core/guards/main.route-guard';
 import { LoginGuard } from './core/guards/login.route-guard';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -17,6 +16,7 @@ const routes: Routes = [
       import('./layouts/main-layout/main-layout.module').then((mod) => mod.MainLayoutModule)
 
   },
+  {path: "**", redirectTo: '/main', pathMatch: 'full'},
 
 ];
 
