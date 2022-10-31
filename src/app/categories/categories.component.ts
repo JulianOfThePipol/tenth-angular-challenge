@@ -1,3 +1,4 @@
+import { Animations } from './../../assets/animations/animations';
 import { Observable } from 'rxjs';
 import { categoriesFromStore } from './featureStore/categories.selectors';
 import { Category } from './../models/rest.models';
@@ -10,7 +11,10 @@ import { CategoryState } from './featureStore/categories.reducers';
 @Component({
   selector: 'app-categories',
   templateUrl: './categories.component.html',
-  styleUrls: ['./categories.component.scss']
+  styleUrls: ['./categories.component.scss'],
+  animations: [
+    Animations.opacity
+  ]
 })
 export class CategoriesComponent implements OnInit {
   @Output() categoryEmitter = new EventEmitter<Category>();

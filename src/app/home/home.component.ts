@@ -1,3 +1,4 @@
+import { Animations } from './../../assets/animations/animations';
 import { Category, Product } from './../models/rest.models';
 import { HomeRestService } from './home-rest.service';
 import { Component, OnInit } from '@angular/core';
@@ -5,7 +6,10 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  styleUrls: ['./home.component.scss'],
+  animations: [
+    Animations.fromLeftToRight
+  ]
 })
 export class HomeComponent implements OnInit {
   currentProducts: Product[] = [];
@@ -34,6 +38,8 @@ export class HomeComponent implements OnInit {
   }
 
   changeProducts (page:number, searchValue:string, category_id: string) {
+    window.scrollTo(0, 0);
+    this.currentProducts = []
     this.restService.getProducts(page, searchValue, category_id).subscribe({
       next: response => {
         this.currentProducts = response.data;

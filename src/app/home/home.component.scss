@@ -6,6 +6,8 @@
     margin-block: 1em;
     gap: 1em;
     padding-inline: 1em;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 
 .current-category, .current-search{

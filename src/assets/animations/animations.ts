@@ -18,12 +18,12 @@ import {
     ]),
 
     fromLeftToRight: trigger('fromLeftToRight', [
-        state('void', style({ transform:"translateX(200%)", opacity: 0 })),
+        state('void', style({ transform:"translateX(200%)" })),
         transition('void => *', [
-          animate('1s ease-out', style({ transform:"translateX(0%)", opacity: 1 })),
+          animate('1s ease-out', style({ transform:"translateX(0%)"})),
         ]),
         transition('* => void', [
-          animate('1s ease-in', style({ transform:"translateX(-200%)", opacity: 0 })),
+          animate('1s ease-in', style({ transform:"translateX(-200%)" })),
         ]),
       ]),
 
@@ -44,6 +44,16 @@ import {
         ]),
         transition('* => void', [
           animate('200ms ease-in', style({ transform:"translateX(50%) translateY(-50%) scale(0)" })),
+        ]),
+      ]),
+      
+      opacity: trigger('opacity', [
+        state('void', style({ opacity:"0" })),
+        transition('void => *', [
+          animate('200ms ease-out', style({ opacity:"1" })),
+        ]),
+        transition('* => void', [
+          animate('200ms ease-in', style({ opacity:"0" })),
         ]),
       ]),
 
