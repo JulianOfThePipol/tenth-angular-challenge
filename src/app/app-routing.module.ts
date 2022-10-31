@@ -3,25 +3,27 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
-  {path: '', redirectTo: '/main', pathMatch: 'full'},
+  { path: '', redirectTo: '/main', pathMatch: 'full' },
   {
     path: 'credentials',
     loadChildren: () =>
-      import('./layouts/credentials-layout/credentials-layout.module').then((mod) => mod.CredentialsLayoutModule),
-    canLoad: [LoginGuard]
+      import('./layouts/credentials-layout/credentials-layout.module').then(
+        (mod) => mod.CredentialsLayoutModule
+      ),
+    canLoad: [LoginGuard],
   },
   {
     path: 'main',
     loadChildren: () =>
-      import('./layouts/main-layout/main-layout.module').then((mod) => mod.MainLayoutModule)
-
+      import('./layouts/main-layout/main-layout.module').then(
+        (mod) => mod.MainLayoutModule
+      ),
   },
-  {path: "**", redirectTo: '/main', pathMatch: 'full'},
-
+  { path: '**', redirectTo: '/main', pathMatch: 'full' },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

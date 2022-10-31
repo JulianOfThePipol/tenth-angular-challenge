@@ -11,13 +11,8 @@ import { CommonModule } from '@angular/common';
 import { ProductDialogComponent } from './product-dialog.component';
 import { NgModule } from '@angular/core';
 
-
-
-
-@NgModule ({
-  declarations: [
-    ProductDialogComponent
-  ],
+@NgModule({
+  declarations: [ProductDialogComponent],
   imports: [
     CommonModule,
 
@@ -28,13 +23,9 @@ import { NgModule } from '@angular/core';
     MatDialogModule,
     MatSelectModule,
     MatButtonModule,
-    MatInputModule
+    MatInputModule,
   ],
-  providers: [
-    CartService
-  ],
-  exports: [
-    ProductDialogComponent
-  ]
+  providers: [CartService],
+  exports: [ProductDialogComponent],
 })
-export class ProductDialogModule { }
+export class ProductDialogModule {}

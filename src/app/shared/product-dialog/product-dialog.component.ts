@@ -3,7 +3,7 @@ import { LikeService } from './../services/like.service';
 import { CartService } from './../services/cart.service';
 import { Cart, Product, CartItem } from './../../models/rest.models';
 import { Store } from '@ngrx/store';
-import { Component, OnInit, Inject, OnDestroy } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
@@ -11,7 +11,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
   templateUrl: './product-dialog.component.html',
   styleUrls: ['./product-dialog.component.scss'],
 })
-export class ProductDialogComponent implements OnInit, OnDestroy {
+export class ProductDialogComponent implements OnInit {
   cart: Cart = {
     total: 0,
     total_items: 0,
@@ -19,7 +19,6 @@ export class ProductDialogComponent implements OnInit, OnDestroy {
   };
   cartItem: CartItem | null = null;
   likeState: -1 | 0 | 1 = -1;
-
   constructor(
     public dialogRef: MatDialogRef<ProductDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public product: Product,
@@ -43,8 +42,6 @@ export class ProductDialogComponent implements OnInit, OnDestroy {
       },
     });
   }
-
-  ngOnDestroy(): void {}
 
   addItemToCart(amount: number) {
     this.cartService.addItemToCart(

@@ -13,4 +13,4 @@
 <h3 *ngIf="totalPages === 0 && !currentSearch">There are no items in this category</h3>
 
 <app-product-list [products]="currentProducts" @fromLeftToRight *ngIf="currentProducts.length > 0"></app-product-list>
-<app-pagination [currentPage]="currentPage" [pages]="totalPages" (currentPageEmitter)="changePage($event)" *ngIf="totalPages > 1" @fromLeftToRight ></app-pagination>
+<app-pagination [currentPage]="currentPage" [pages]="totalPages" (currentPageEmitter)="changePage($event)" *ngIf="totalPages > 1"  ></app-pagination>

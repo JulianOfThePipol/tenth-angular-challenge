@@ -7,49 +7,49 @@ import { Component, OnInit } from '@angular/core';
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
-  animations: [
-    Animations.fromLeftToRight
-  ]
+  animations: [Animations.fromLeftToRight],
 })
 export class HomeComponent implements OnInit {
   currentProducts: Product[] = [];
-  currentSearch = "";
-  currentCategory:Category | null = null;
+  currentSearch = '';
+  currentCategory: Category | null = null;
   currentPage: number = 1;
   totalPages!: number;
-  constructor(
-    private restService: HomeRestService
-  ) { }
+  constructor(private restService: HomeRestService) {}
 
   ngOnInit(): void {
-    this.changeProducts(1, "", "");
+    this.changeProducts(1, '', '');
   }
 
-  changeCategory (event:Category | null){
+  changeCategory(event: Category | null) {
     this.currentCategory = event;
     this.currentPage = 1;
-    this.changeProducts(1, this.currentSearch, this.currentCategory?.id || "");
+    this.changeProducts(1, this.currentSearch, this.currentCategory?.id || '');
   }
 
-  changeSearch (event: string) {
+  changeSearch(event: string) {
     this.currentSearch = event;
     this.currentPage = 1;
-      this.changeProducts(1, this.currentSearch, this.currentCategory?.id || "");
+    this.changeProducts(1, this.currentSearch, this.currentCategory?.id || '');
   }
 
-  changeProducts (page:number, searchValue:string, category_id: string) {
+  changeProducts(page: number, searchValue: string, category_id: string) {
     window.scrollTo(0, 0);
-    this.currentProducts = []
+    this.currentProducts = [];
     this.restService.getProducts(page, searchValue, category_id).subscribe({
-      next: response => {
+      next: (response) => {
         this.currentProducts = response.data;
         this.totalPages = response.meta.last_page;
-      }
-    })
+      },
+    });
   }
 
-  changePage (page:number) {
+  changePage(page: number) {
     this.currentPage = page;
-    this.changeProducts(page, this.currentSearch, this.currentCategory?.id || "");
-  } 
+    this.changeProducts(
+      page,
+      this.currentSearch,
+      this.currentCategory?.id || ''
+    );
+  }
 }
