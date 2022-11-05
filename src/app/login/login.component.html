@@ -1,6 +1,6 @@
 <div class="container login-theme">
     <h2>Login</h2>
-    <form (ngSubmit)="onSubmit()" [formGroup]="loginForm">
+    <form (ngSubmit)="onSubmit()" [formGroup]="loginForm" id="form">
         <mat-form-field appearance="legacy">
             <mat-label>Email Address:</mat-label>
             <input 
@@ -9,11 +9,12 @@
             formControlName="email" 
             placeholder="Your email"
             autocomplete="off"
+            id="email"
             >
             <mat-icon matSuffix>mail_outline</mat-icon>
             <mat-hint>Input the fully qualified email address</mat-hint>
-            <mat-error *ngIf="email?.errors?.['required']" color="warn">Email is required</mat-error>
-            <mat-error *ngIf="email?.errors?.['pattern']">Please enter a valid email</mat-error>
+            <mat-error *ngIf="email?.errors?.['required']" color="warn" class="mat-error-required">Email is required</mat-error>
+            <mat-error *ngIf="email?.errors?.['pattern']" id="error-email">Please enter a valid email</mat-error>
         </mat-form-field>
 
 
@@ -24,12 +25,13 @@
                 formControlName="password"
                 autocomplete="off"
                 [type]="passwordShown ? 'text' : 'password'"
+                id="password"
             >
             <mat-icon matSuffix (click)="toggleVisibility()" class="eye">{{passwordShown?'visibility_off':'visibility'}}</mat-icon>
-            <mat-error *ngIf="password?.errors?.['required']">Password is required</mat-error>
+            <mat-error *ngIf="password?.errors?.['required']" class="mat-error-required">Password is required</mat-error>
         </mat-form-field>
         <div mat-dialog-actions >
-            <button mat-raised-button color="primary" type="submit" [disabled]="!loginForm.valid || loading">Submit</button>
+            <button mat-raised-button color="primary" type="submit" [disabled]="!loginForm.valid || loading" id="submitBtn">Submit</button>
         </div>
     </form>
 </div>

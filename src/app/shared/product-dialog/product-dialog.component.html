@@ -1,33 +1,33 @@
 <mat-card class="product">
-    <h2 >{{product.name | titlecase}}</h2>
+    <h2>{{product.name | titlecase}}</h2>
     <img mat-card-image [src]="product.image?.url" onerror="this.src='assets/imgs/imageNotFound.png'">
-    <mat-card-subtitle>Category: {{product.category?.name | titlecase}}</mat-card-subtitle>
-    <mat-card-content>{{product.description}}</mat-card-content>
+    <mat-card-subtitle id="category">Category: {{product.category?.name | titlecase}}</mat-card-subtitle>
+    <mat-card-content id="description">{{product.description}}</mat-card-content>
     <mat-card-content class="price">{{product.master.price | currency:'USD':'symbol'}}</mat-card-content>
     <mat-card-subtitle *ngIf="product.master.stock">Currently there are {{product.master.stock}} items in stock</mat-card-subtitle>
     <mat-card-subtitle *ngIf="!product.master.stock && !cartItem" class="no-stock">There is no stock for this item</mat-card-subtitle>
     <div>
         <mat-card-subtitle class="like">
             <mat-icon class="rateClicked" *ngIf="likeState === 1">thumb_up_alt</mat-icon>
-            <mat-icon *ngIf="likeState !== 1" class="rate" (click)="rateProduct('up')">thumb_up_alt</mat-icon>
+            <mat-icon *ngIf="likeState !== 1" class="rate" (click)="rateProduct('up')" id="like-button">thumb_up_alt</mat-icon>
         </mat-card-subtitle>
         <mat-card-subtitle class="dislike">
             <mat-icon class="rateClicked" *ngIf="likeState === 0">thumb_down_alt</mat-icon>
-            <mat-icon *ngIf="likeState !== 0" class="rate" (click)="rateProduct('down')">thumb_down_alt</mat-icon>
+            <mat-icon *ngIf="likeState !== 0" class="rate" (click)="rateProduct('down')" id="dislike-button">thumb_down_alt</mat-icon>
         </mat-card-subtitle>
     </div>
     <mat-card-actions *ngIf="product.master.stock  > 0 || cartItem">
         <form #itemForm="ngForm" >
-            <div *ngIf="product.master.stock">
+            <div *ngIf="product.master.stock" id="add-product">
                 <mat-form-field>
                     <mat-label>Add: </mat-label>
-                    <input matInput [max]="product.master.stock  - (cartItem?.quantity || 0)  " type="number" min=1 name="addAmount" ngModel required #addAmount="ngModel">
+                    <input matInput [max]="product.master.stock  - (cartItem?.quantity || 0)  " type="number" min=1 name="addAmount" ngModel required #addAmount="ngModel" id="add-product-input">
                     <mat-error *ngIf="addAmount.errors?.['min'] || addAmount.errors?.['required']">Add at least one item</mat-error>
                     <mat-error *ngIf="addAmount.errors?.['max']">Exceeded stock amount</mat-error>
                 </mat-form-field>
-                <button mat-raised-button color="primary" type="submit" [disabled]="addAmount.errors" (click)="addItemToCart(addAmount.value)">Add Item/s</button>
+                <button mat-raised-button color="primary" type="submit" [disabled]="addAmount.errors" (click)="addItemToCart(addAmount.value)" id="add-product-button">Add Item/s</button>
             </div>
-            <div *ngIf="cartItem">
+            <div *ngIf="cartItem" id="remove-product">
                 <mat-form-field>
                     <mat-label>Remove: </mat-label>
                     <input matInput [max]="cartItem.quantity" type="number" min=1 name="removeAmount" ngModel required #removeAmount="ngModel">

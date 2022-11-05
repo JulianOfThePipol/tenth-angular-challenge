@@ -6,6 +6,7 @@ import * as fromCategories from './featureStore/categories.reducers';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { CategoriesRestService } from './categories-rest.service';
 
 @NgModule({
   declarations: [CategoriesComponent],
@@ -21,5 +22,6 @@ import { MatButtonModule } from '@angular/material/button';
     MatIconModule,
   ],
   exports: [CategoriesComponent],
+  providers:[CategoriesRestService]
 })
 export class CategoriesModule {}

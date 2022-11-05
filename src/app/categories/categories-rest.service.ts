@@ -1,9 +1,7 @@
 import { GlobalRestService } from './../core/services/global-rest.service';
 import { Injectable } from '@angular/core';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class CategoriesRestService {
 
   constructor(

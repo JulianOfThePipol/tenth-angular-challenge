@@ -64,16 +64,16 @@ export interface Product {
     "published_at": string
     "master": {
         "id": number,
-        "sku": string,
+        "sku"?: string,
         "price": string,
-        "promotional_price": string,
+        "promotional_price"?: string,
         "stock": number,
-        "weight": string,
-        "height": string,
-        "width": string,
-        "depth": string,
-        "is_master": number,
-        "position": number
+        "weight"?: string,
+        "height"?: string,
+        "width"?: string,
+        "depth"?: string,
+        "is_master"?: number,
+        "position"?: number
     },
     "category"?: {
         "id": number,
