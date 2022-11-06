@@ -14,6 +14,8 @@ import { StoreModule } from '@ngrx/store';
 import { environment } from '../environments/environment';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
+import { PreloadingStrategy } from '@angular/router';
+import { APP_ROUTES_MODULE_PROVIDER } from './core/preloadStrategy';
 
 @NgModule({
   declarations: [AppComponent],
@@ -43,6 +45,7 @@ import { EffectsModule } from '@ngrx/effects';
   ],
   providers: [
     GlobalRestService,
+    APP_ROUTES_MODULE_PROVIDER,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     { provide: ErrorHandler, useClass: ErrorHandlerService },
   ],

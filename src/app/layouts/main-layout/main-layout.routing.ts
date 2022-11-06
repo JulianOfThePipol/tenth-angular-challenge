@@ -12,14 +12,14 @@ const routes: Routes = [
         pathMatch: 'full',
         loadChildren: () =>
           import('../../home/home.module').then((mod) => mod.HomeModule),
-        data: { animation: 'first'}
+        data: { animation: 'first', preload: true, delay: false}
       },
       {
         path: 'cart',
         pathMatch: 'full',
         loadChildren: () =>
           import('../../cart/cart.module').then((mod) => mod.CartModule),
-        data: { animation: 'second'}
+        data: { animation: 'second', preload: true, delay: true}
       }
     ],
   },
