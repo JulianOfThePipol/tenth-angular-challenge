@@ -37,9 +37,6 @@ describe('LoginComponent', () => {
     const loginRestServiceSpy = jasmine.createSpyObj('LoginRestService', [
       'loginUser',
     ]);
-  
-    
-
     await TestBed.configureTestingModule({
       declarations: [LoginComponent],
       providers: [
@@ -101,7 +98,6 @@ describe('LoginComponent', () => {
     fixture.detectChanges();
     const errors = emailFromGroup?.errors;
     const matError = debug.query(By.css('#error-email'));
-    console.log(matError);
     expect(errors?.['pattern'])
       .withContext('No pattern error in reactive form')
       .toBeTruthy();

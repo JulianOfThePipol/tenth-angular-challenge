@@ -24,9 +24,8 @@ describe('HomeComponent', () => {
   
   beforeEach(async () => {
     const restServiceSpy = jasmine.createSpyObj('restHomeService',{
-      getProducts: () => {return of(mockProducts)}
+      getProducts: of(mockProducts)
     });
-    /* restServiceSpy.getProducts.and.returnValue(of(mockProducts)) */
 
     await TestBed.configureTestingModule({
       declarations: [

@@ -47,7 +47,7 @@
 </div>
 
 <div class="totals" *ngIf="cart.total > 0">
-    <h3>Products: {{itemsAmount}}</h3>
-    <h3>Total: {{cart.total}}</h3>
+    <h3 id="amount">Products: {{itemsAmount}}</h3>
+    <h3 id="total">Total: {{cart.total}}</h3>
     <button mat-raised-button color="primary" (click)="buyCart()">Buy Items</button>
 </div>

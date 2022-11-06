@@ -6,14 +6,9 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class LoginRestService {
-
-  constructor(
-    private globalRest: GlobalRestService,
-
-  ) { }
+  constructor(private globalRest: GlobalRestService) {}
 
   loginUser(userData: LoginData) {
-    return this.globalRest.login(userData)
+    return this.globalRest.login(userData);
   }
-
 }

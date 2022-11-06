@@ -6,6 +6,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
+import { By } from '@angular/platform-browser';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { GlobalRestService } from '../core/services/global-rest.service';
 import { cartInitialStateMock, cartSelectorsMock } from '../mocks/stores/cart.store.mock';
@@ -13,7 +14,7 @@ import { CartService } from '../shared/services/cart.service';
 
 import { CartComponent } from './cart.component';
 
-describe('CartComponent', () => {
+fdescribe('CartComponent', () => {
   let component: CartComponent,
       fixture: ComponentFixture<CartComponent>,
       cartService: CartService,
@@ -64,4 +65,23 @@ describe('CartComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should have a cart an items amount from store', () => {
+    expect(component.itemsAmount).toBeTruthy();
+    expect(component.cart).toBeTruthy();
+  });
+
+  it('should have as many rows as items in cart', () => {
+    const tableRows= debug.queryAll(By.css('tr'))
+    const cartItemsAmount = component.cart.items.length;
+    expect(tableRows.length).toBe(cartItemsAmount + 1); /* Table header is also a tr */ 
+  });
+
+  it('should display total', ()=> {
+    const total = component.cart.total_items;
+    const displayedTotal = debug.query(By.css('#total')).nativeElement.innerText;
+    expect(displayedTotal).toContain(total)
+  })
+
+
 });

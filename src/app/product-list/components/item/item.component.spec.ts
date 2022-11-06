@@ -9,7 +9,7 @@ import { productMock } from 'src/app/mocks/data.mock';
 
 import { ItemComponent } from './item.component';
 
-describe('ItemComponent', () => {
+fdescribe('ItemComponent', () => {
   let component: ItemComponent,
     fixture: ComponentFixture<ItemComponent>,
     debug: DebugElement,
@@ -58,8 +58,8 @@ describe('ItemComponent', () => {
   it('should display the likes and dislikes count', () => {
     const likes = debug.query(By.css('#like'))
     const dislikes = debug.query(By.css('#dislike'))
-    expect(dislikes.nativeElement.innerText.includes(productMock.likes_down_count)).toBeTrue();
-    expect(likes.nativeElement.innerText.includes(productMock.likes_up_count)).toBeTrue();
+    expect(dislikes.nativeElement.innerText).toContain(productMock.likes_down_count);
+    expect(likes.nativeElement.innerText).toContain(productMock.likes_up_count);
   });
 
   it('should open dialog on card click', () => {

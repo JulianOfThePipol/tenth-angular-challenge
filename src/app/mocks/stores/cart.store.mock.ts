@@ -26,4 +26,7 @@ export const cartInitialStateMock: Cart = {
     ]
 }
 
-export const cartSelectorsMock: MockSelector[] = [{ selector: 'cartFromStore', value: {cart:cartInitialStateMock}}]
+export const cartSelectorsMock: MockSelector[] = [
+    { selector: 'cartFromStore', value: {cart:cartInitialStateMock}},
+    {selector: 'cartItemsAmount', value: 1}
+]

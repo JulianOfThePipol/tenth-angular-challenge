@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "ninth-challenge": {
+    "tenth-challenge": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/ninth-challenge",
+            "outputPath": "dist/tenth-challenge",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -75,10 +75,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "ninth-challenge:build:production"
+              "browserTarget": "tenth-challenge:build:production"
             },
             "development": {
-              "browserTarget": "ninth-challenge:build:development"
+              "browserTarget": "tenth-challenge:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -86,7 +86,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "ninth-challenge:build"
+            "browserTarget": "tenth-challenge:build"
           }
         },
         "test": {

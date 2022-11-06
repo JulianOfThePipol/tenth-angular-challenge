@@ -3,7 +3,7 @@ import { GlobalRestService } from '../core/services/global-rest.service';
 
 import { CategoriesRestService } from './categories-rest.service';
 
-fdescribe('CategoriesRestService', () => {
+describe('CategoriesRestService', () => {
   let service: CategoriesRestService,
       restService: GlobalRestService;
 
@@ -22,4 +22,9 @@ fdescribe('CategoriesRestService', () => {
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
+
+  it('should get categories', () => {
+    service.getCategories();
+    expect(restService.getCategories).toHaveBeenCalled();
+  })
 });

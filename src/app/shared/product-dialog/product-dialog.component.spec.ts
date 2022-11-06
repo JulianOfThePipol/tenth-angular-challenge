@@ -219,7 +219,6 @@ describe('ProductDialogComponent', () => {
     await removeInput.setValue(
       `${amount}`
     );
-    console.log(await removeInput.getValue())
     await removeButton.click();
     expect(cartService.addItemToCart).toHaveBeenCalledOnceWith(
       (component.cartItem?.quantity as number - amount),
