@@ -9,7 +9,7 @@ import { productMock } from 'src/app/mocks/data.mock';
 
 import { ItemComponent } from './item.component';
 
-fdescribe('ItemComponent', () => {
+describe('ItemComponent', () => {
   let component: ItemComponent,
     fixture: ComponentFixture<ItemComponent>,
     debug: DebugElement,

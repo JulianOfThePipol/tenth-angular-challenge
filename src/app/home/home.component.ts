@@ -34,7 +34,7 @@ export class HomeComponent implements OnInit {
   }
 
   changeProducts(page: number, searchValue: string, category_id: string) {
-    window.scrollTo(0, 0);
+    scroll(0, 0);
     this.currentProducts = [];
     this.restService.getProducts(page, searchValue, category_id).subscribe({
       next: (response) => {

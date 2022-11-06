@@ -121,10 +121,7 @@ describe('LoginComponent', () => {
     expect(matErrors.length).withContext('Material errors werent displayed').toBe(2)
   });
 
-  it('should navigate to main on goToHome call', () => { /* I've tested that the navigate has been called, but not exactly as i wanted. */
-/*     const spy = jasmine.createSpy('loadChildren');
-    const newMainRoute = { path: 'main', loadChildren: spy  };
-    router.resetConfig([newMainRoute]);  Here, i was trying to see if the loadCHildren gets called, but it probably is outside the scope of this test*/
+  it('should navigate to main on goToHome call', () => { 
     component.goToHome();
     expect (routerSpy.navigate).toHaveBeenCalledWith(['main']);
   });

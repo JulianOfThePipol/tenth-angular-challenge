@@ -5,6 +5,8 @@ import { Cart, Product, CartItem } from './../../models/rest.models';
 import { Store } from '@ngrx/store';
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Router } from '@angular/router';
+import { SnackbarService } from '../services/snackbar.service';
 
 @Component({
   selector: 'app-product-dialog',
@@ -24,7 +26,9 @@ export class ProductDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public product: Product,
     private cartStore: Store<Cart>,
     private cartService: CartService,
-    private likeService: LikeService
+    private likeService: LikeService,
+    private router: Router,
+    private snackbar: SnackbarService
   ) {}
 
   ngOnInit(): void {
@@ -44,6 +48,15 @@ export class ProductDialogComponent implements OnInit {
   }
 
   addItemToCart(amount: number) {
+    if(!localStorage.getItem('user')) {
+      this.noUserAction('Please, log in to add products to cart');
+      return
+    }
+    if(!localStorage.getItem('user')) {
+      this.router.navigate(['/credentials']);
+      this.closeDialog();
+      return 
+    }
     this.cartService.addItemToCart(
       amount + (this.cartItem?.quantity || 0),
       this.product.id,
@@ -71,6 +84,10 @@ export class ProductDialogComponent implements OnInit {
   }
 
   rateProduct(kind: 'up' | 'down') {
+    if(!localStorage.getItem('user')) {
+      this.noUserAction('Please, log in to rate products');
+      return
+    }
     this.likeService.likeProduct(kind, this.product.id);
     if (kind === 'up') {
       this.likeState = 1;
@@ -82,18 +99,11 @@ export class ProductDialogComponent implements OnInit {
   closeDialog(): void {
     this.dialogRef.close();
   }
+
+  noUserAction(message:string) {
+    this.router.navigate(['/credentials']);
+    this.closeDialog();
+    this.snackbar.openSnackBarWarning(message)
+  }
 }
 
-/*     if (localStorage.getItem('user')) {
-      let user: User = JSON.parse(localStorage.getItem('user') as string);
-      this.likeService.getLiked(this.product.id, user.id).subscribe({
-        next: (response) => {
-          if (response.data.length < 0) {
-            this.likeState = response.data[0].kind;
-          }
-        },
-        error: (error) => (this.likeState = -1),
-      });
-    } else {
-      this.likeState = -1;
-    } */

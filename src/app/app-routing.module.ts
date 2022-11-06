@@ -10,6 +10,7 @@ export const routes: Routes = [
       import('./layouts/credentials-layout/credentials-layout.module').then(
         (mod) => mod.CredentialsLayoutModule
       ),
+      data: { animation: 'second'},
     canLoad: [LoginGuard],
   },
   {
@@ -18,6 +19,7 @@ export const routes: Routes = [
       import('./layouts/main-layout/main-layout.module').then(
         (mod) => mod.MainLayoutModule
       ),
+      data: { animation: 'first'}
   },
   { path: '**', redirectTo: '/main', pathMatch: 'full' },
 ];

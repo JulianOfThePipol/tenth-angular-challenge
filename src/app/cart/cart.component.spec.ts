@@ -14,7 +14,7 @@ import { CartService } from '../shared/services/cart.service';
 
 import { CartComponent } from './cart.component';
 
-fdescribe('CartComponent', () => {
+describe('CartComponent', () => {
   let component: CartComponent,
       fixture: ComponentFixture<CartComponent>,
       cartService: CartService,
@@ -72,15 +72,41 @@ fdescribe('CartComponent', () => {
   });
 
   it('should have as many rows as items in cart', () => {
-    const tableRows= debug.queryAll(By.css('tr'))
+    const tableRows= debug.queryAll(By.css('tr')).slice(1);
     const cartItemsAmount = component.cart.items.length;
-    expect(tableRows.length).toBe(cartItemsAmount + 1); /* Table header is also a tr */ 
+    expect(tableRows.length).toBe(cartItemsAmount); /* Table header is also a tr */ 
   });
 
-  it('should display total', ()=> {
+  it('should display total', () => {
     const total = component.cart.total_items;
     const displayedTotal = debug.query(By.css('#total')).nativeElement.innerText;
     expect(displayedTotal).toContain(total)
+  })
+
+  it('should display each row with proper info', () => {
+    const tableRows = debug.queryAll(By.css('tr')).slice(1);
+    const cartItems = component.cart.items;
+    tableRows.map((row, index) => {
+      let currentItem = cartItems[index];
+      let rowQuantity = tableRows[index].nativeElement.childNodes[0].innerText;
+      let rowName = tableRows[index].nativeElement.childNodes[1].innerText;
+      let rowDescription = tableRows[index].nativeElement.childNodes[2].innerText;
+      let rowPrice = tableRows[index].nativeElement.childNodes[3].innerText;
+      let rowTotal = tableRows[index].nativeElement.childNodes[4].innerText;
+      expect(parseInt(rowQuantity)).toBe(currentItem.quantity);
+      expect(rowName).toBe(currentItem.name?.trim());
+      expect(rowDescription).toBe(currentItem.description);
+      expect(rowPrice.slice(1)).toBeCloseTo(parseFloat(currentItem.price as string));
+      expect(rowTotal.slice(1)).toBeCloseTo(parseFloat(currentItem.total as string));
+    })
+  })
+
+  it('should call remove item from cart on remove button click', () => {
+    const tableRow = debug.queryAll(By.css('tr'))[1];
+    const removeButton = tableRow.nativeElement.childNodes[6].childNodes[0];
+    removeButton.click();
+    fixture.detectChanges();
+    expect(cartService.removeItemFromCart).toHaveBeenCalled()
   })
 
 

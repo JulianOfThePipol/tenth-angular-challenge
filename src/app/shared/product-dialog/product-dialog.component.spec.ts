@@ -32,6 +32,7 @@ import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { HarnessLoader } from '@angular/cdk/testing';
 
 import { capitalize } from 'src/app/helper/helper.functions';
+import { SnackbarService } from '../services/snackbar.service';
 
 describe('ProductDialogComponent', () => {
   let component: ProductDialogComponent,
@@ -40,7 +41,8 @@ describe('ProductDialogComponent', () => {
     likeService: LikeService,
     store: MockStore,
     debug: DebugElement,
-    loader: HarnessLoader;
+    loader: HarnessLoader,
+    snacbar: SnackbarService;
 
   beforeEach(async () => {
     const cartServiceSpy = jasmine.createSpyObj('CartService', [
@@ -48,6 +50,7 @@ describe('ProductDialogComponent', () => {
       'removeItemFromCart',
     ]);
     const likeServiceSpy = jasmine.createSpyObj('LikeService', ['likeProduct']);
+    const snacbarServiceSpy = jasmine.createSpyObj('SnackbarService', ['openSnackBarWarning'])
     await TestBed.configureTestingModule({
       declarations: [ProductDialogComponent],
       imports: [
@@ -67,6 +70,7 @@ describe('ProductDialogComponent', () => {
         { provide: LikeService, useValue: likeServiceSpy },
         { provide: MAT_DIALOG_DATA, useValue: productMock },
         { provide: MatDialogRef, useValue: productMock },
+        { provide: SnackbarService, useValue: snacbarServiceSpy},
         provideMockStore({
           initialState: { cart: cartInitialStateMock },
           selectors: cartSelectorsMock,
@@ -80,9 +84,10 @@ describe('ProductDialogComponent', () => {
     store =
       TestBed.inject(
         MockStore
-      ); /* It should be considered that the mocked store has the current item in its cart. In order to test negative paths, its necessary to change the cart item's id */
+      ); /* It should be considered that the mocked store has an item in its cart. In order to test negative paths, its necessary to change the cart item's id*/
     cartService = TestBed.inject(CartService);
     likeService = TestBed.inject(LikeService);
+    snacbar = TestBed.inject(SnackbarService)
     loader = TestbedHarnessEnvironment.loader(fixture);
     fixture.detectChanges();
   });
@@ -114,12 +119,14 @@ describe('ProductDialogComponent', () => {
   });
 
   it('should rate product on clicking like', () => {
+    spyOn(localStorage, 'getItem').and.returnValue('mockedstring');
     const likeButton = debug.query(By.css('#like-button'));
     likeButton.nativeElement.click();
     expect(likeService.likeProduct).toHaveBeenCalledWith('up', productMock.id);
   });
 
   it('should rate product on clicking dislike', () => {
+    spyOn(localStorage, 'getItem').and.returnValue('mockedstring');
     const dislikeButton = debug.query(By.css('#dislike-button'));
     dislikeButton.nativeElement.click();
     expect(likeService.likeProduct).toHaveBeenCalledWith(
@@ -183,6 +190,7 @@ describe('ProductDialogComponent', () => {
   });
 
   it('should add items to cart on valid addButton click', async () => {
+    spyOn(localStorage, 'getItem').and.returnValue('mockedstring');
     const addProductDiv = await loader.getChildLoader('#add-product');
     const addButton = await addProductDiv.getHarness(MatButtonHarness);
     const addInput = await addProductDiv.getHarness(MatInputHarness);

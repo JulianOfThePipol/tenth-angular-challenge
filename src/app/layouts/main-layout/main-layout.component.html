@@ -1,5 +1,5 @@
 <app-navbar [itemsAmount]="cartItemsAmount"></app-navbar>
-<div>
+<div [@routeAnimations]="getRouteAnimationData()">
     <router-outlet></router-outlet>
 </div>
 <app-footer></app-footer>

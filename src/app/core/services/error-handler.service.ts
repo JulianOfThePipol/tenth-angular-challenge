@@ -29,6 +29,7 @@ export class ErrorHandlerService implements ErrorHandler {
       this.snackBar.openSnackBarWarning(
         'An error has ocurred, please try again'
       );
+      console.warn(error)
     }
   }
 }

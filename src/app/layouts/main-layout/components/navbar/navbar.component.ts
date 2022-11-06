@@ -38,6 +38,7 @@ export class NavbarComponent implements OnInit {
     this.tokenService.deleteToken();
     localStorage.removeItem('user');
     this.userData = null;
+    this.router.navigate([''])
   }
 
   toggleUserInfo () {
