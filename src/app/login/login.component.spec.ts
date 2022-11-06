@@ -21,7 +21,7 @@ import { Router } from '@angular/router';
 import { userLoginMock } from '../mocks/data.mock';
 
 
-describe('LoginComponent', () => {
+fdescribe('LoginComponent', () => {
   let component: LoginComponent,
     fixture: ComponentFixture<LoginComponent>,
     restService: any,
@@ -91,8 +91,9 @@ describe('LoginComponent', () => {
     expect(goToHomeSpy).toHaveBeenCalled();
   });
 
-  it('should display wrong email error',  () => {
+  it('should display wrong email error and disable login button',  () => {
     const emailFromGroup = component.loginForm.get('email');
+    const loginButton = debug.query(By.css('#submit-button'))
     emailFromGroup?.setValue('saraza');
     emailFromGroup?.markAsTouched();
     fixture.detectChanges();
@@ -102,10 +103,12 @@ describe('LoginComponent', () => {
       .withContext('No pattern error in reactive form')
       .toBeTruthy();
     expect(matError).withContext('No Material error displayed').toBeTruthy();
+    expect(loginButton.nativeElement.disabled).toBe(true)
   });
 
-  it('should have errors if no input', () => {
+  it('should have errors and disable login button if no input', () => {
     const form = component.loginForm;
+    const loginButton = debug.query(By.css('#submit-button'))
     const emailInput = form.get('email');
     const passwordInput = form.get('password');
     emailInput?.markAsTouched();
@@ -119,6 +122,7 @@ describe('LoginComponent', () => {
       .withContext('No password input required error')
       .toBeTruthy();
     expect(matErrors.length).withContext('Material errors werent displayed').toBe(2)
+    expect(loginButton.nativeElement.disabled).toBe(true)
   });
 
   it('should navigate to main on goToHome call', () => { 

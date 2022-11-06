@@ -17,6 +17,9 @@ export class ItemComponent {
     const dialogRef = this.dialog.open(ProductDialogComponent, {
       data: data,
       scrollStrategy: new NoopScrollStrategy(),
+      enterAnimationDuration: '1000ms',
+      exitAnimationDuration: '800ms'
+      
     });
   }
 }
