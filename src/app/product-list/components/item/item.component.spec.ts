@@ -42,7 +42,7 @@ describe('ItemComponent', () => {
 
   it('should display category according to product and capitalized', () => {
     const category = debug.query(By.css('#category'));
-    expect(category.nativeElement.innerText).toBe(`Category: ${capitalize(productMock.category.name)}`);
+    expect(category.nativeElement.innerText).toBe(`Category: ${capitalize(productMock.category?.name as string)}`);
   });
 
   it('should display description according to product', () => {

@@ -5,7 +5,7 @@ import { SnackbarService } from './snackbar.service';
 import { of } from 'rxjs';
 import { Status } from 'src/app/mocks/status-snackbar.mock';
 
-fdescribe('SnackbarService', () => {
+describe('SnackbarService', () => {
   let service: SnackbarService,
       snackbar: MatSnackBar;
 

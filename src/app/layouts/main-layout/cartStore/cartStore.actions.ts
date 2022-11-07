@@ -1,5 +1,5 @@
 import { Cart, CartItem} from './../../../models/rest.models';
-import { createAction, props } from '@ngrx/store';
+import { Action, createAction, props } from '@ngrx/store';
 
 export const setCart = createAction (
     '[Cart Set] Set Cart',

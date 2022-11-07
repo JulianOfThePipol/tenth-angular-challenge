@@ -32,17 +32,8 @@ export class GlobalRestService {
     page: number,
     itemPerPage: number
   ): Observable<ProductsResponse> {
-    return this.http.request<ProductsResponse>(
-      'get',
-      `${this.url}/products?include=master,category`,
-      {
-        body: {
-          page: {
-            size: itemPerPage,
-            number: page,
-          },
-        },
-      }
+    return this.http.get<ProductsResponse>(
+      `${this.url}/products?include=master,category&[page][size]=${itemPerPage}&[page][number]=${page}`
     );
   }
 

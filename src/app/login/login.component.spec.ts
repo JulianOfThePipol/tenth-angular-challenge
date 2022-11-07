@@ -21,7 +21,7 @@ import { Router } from '@angular/router';
 import { userLoginMock } from '../mocks/data.mock';
 
 
-fdescribe('LoginComponent', () => {
+describe('LoginComponent', () => {
   let component: LoginComponent,
     fixture: ComponentFixture<LoginComponent>,
     restService: any,
@@ -37,6 +37,7 @@ fdescribe('LoginComponent', () => {
     const loginRestServiceSpy = jasmine.createSpyObj('LoginRestService', [
       'loginUser',
     ]);
+    
     await TestBed.configureTestingModule({
       declarations: [LoginComponent],
       providers: [
@@ -129,4 +130,18 @@ fdescribe('LoginComponent', () => {
     component.goToHome();
     expect (routerSpy.navigate).toHaveBeenCalledWith(['main']);
   });
+
+  it('should have submit button working if inputs are valid', () => {
+    restService.loginUser.and.returnValue(of(userLoginMock))
+    const form = component.loginForm;
+    const loginButton = debug.query(By.css('#submit-button'))
+    const emailInput = form.get('email');
+    const passwordInput = form.get('password');
+    emailInput?.setValue('mock@mock.com');
+    passwordInput?.setValue('mockMock');
+    fixture.detectChanges();
+    expect(loginButton.nativeElement.disabled).toBeFalse();
+    loginButton.nativeElement.click();
+    expect(restService.loginUser).toHaveBeenCalled();
+  })
 });

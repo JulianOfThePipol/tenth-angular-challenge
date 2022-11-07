@@ -1,4 +1,3 @@
-import { Category } from './../../models/rest.models';
 import { CategoryState } from './categories.reducers';
 import { createFeatureSelector, createSelector } from "@ngrx/store";
 

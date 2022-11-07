@@ -1,19 +1,14 @@
 import { setCart, addItem, addFirstItem, changeItemQuantity, removeItem, deleteCart, buyCart } from './cartStore.actions';
 import { Cart } from './../../../models/rest.models';
 import {
-  ActionReducer,
-  ActionReducerMap,
-  createFeatureSelector,
   createReducer,
-  createSelector,
-  MetaReducer,
   on
 } from '@ngrx/store';
 
 export const cartFeatureKey = 'cart';
 
 
-const initialState: Cart = {
+export const initialState: Cart = {
   id: 0,
   user_id: 0,
   number: 0,
