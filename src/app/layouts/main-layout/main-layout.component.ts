@@ -26,7 +26,6 @@ export class MainLayoutComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    console.log(this.contexts.getContext('primary')?.route?.snapshot?.data?.['animation'])
     if (this.tokenService.getToken()) {
       this.restService.getCart();
       this.cartStore.select(cartItemsAmount).subscribe({

@@ -2,8 +2,7 @@ import { cartFromStore } from './../../layouts/main-layout/cartStore/cartStore.s
 import { Cart } from './../../models/rest.models';
 import { Store } from '@ngrx/store';
 import { addItem, changeItemQuantity, deleteCart, removeItem, buyCart } from './../../layouts/main-layout/cartStore/cartStore.actions';
-import { GlobalRestService } from './../../core/services/global-rest.service';
-import { Injectable, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { addFirstItem } from 'src/app/layouts/main-layout/cartStore/cartStore.actions';
 
 @Injectable()
