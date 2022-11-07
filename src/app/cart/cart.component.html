@@ -1,53 +1,68 @@
-<div class="to-home"><button mat-mini-fab (click)="goToHome()"><mat-icon>home</mat-icon></button></div>
+<div class="to-home">
+  <button mat-mini-fab (click)="goToHome()"><mat-icon>home</mat-icon></button>
+</div>
 
 <h1>Your Cart</h1>
 <h2 *ngIf="cart.total <= 0">There are no products in your cart!</h2>
 
 <div class="table-wrapper" *ngIf="cart.total > 0">
-    <table mat-table [dataSource]="cart.items">
-        <ng-container matColumnDef="quantity">
-            <th mat-header-cell *matHeaderCellDef> Quantity </th>
-            <td mat-cell *matCellDef="let element"> {{element.quantity}} </td>
-        </ng-container>
+  <table mat-table [dataSource]="cart.items">
+    <ng-container matColumnDef="quantity">
+      <th mat-header-cell *matHeaderCellDef>Quantity</th>
+      <td mat-cell *matCellDef="let element">{{ element.quantity }}</td>
+    </ng-container>
 
-        <ng-container matColumnDef="name">
-            <th mat-header-cell *matHeaderCellDef> Name </th>
-            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-        </ng-container>
-        
-        <ng-container matColumnDef="description">
-            <th mat-header-cell *matHeaderCellDef> Description </th>
-            <td mat-cell *matCellDef="let element"> {{element.description}} </td>
-        </ng-container>
-        
-        <ng-container matColumnDef="price">
-            <th mat-header-cell *matHeaderCellDef> Price </th>
-            <td mat-cell *matCellDef="let element"> {{element.price | currency}} </td>
-        </ng-container>
-        
-        <ng-container matColumnDef="total">
-            <th mat-header-cell *matHeaderCellDef> Total </th>
-            <td mat-cell *matCellDef="let element"> {{element.total | currency}} </td>
-        </ng-container>
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef>Name</th>
+      <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+    </ng-container>
 
-        <ng-container matColumnDef="id">
-            <th mat-header-cell *matHeaderCellDef> </th>
-            <td mat-cell *matCellDef="let element"> <button mat-flat-button color="accent" (click)="seeProduct(element.product_variant_id)">See Product</button></td>
-        </ng-container>
+    <ng-container matColumnDef="description">
+      <th mat-header-cell *matHeaderCellDef>Description</th>
+      <td mat-cell *matCellDef="let element">{{ element.description }}</td>
+    </ng-container>
 
-        <ng-container matColumnDef="cross">
-            <th mat-header-cell *matHeaderCellDef> </th>
-            <td mat-cell *matCellDef="let element"> <button mat-mini-fab color="warn" (click)="removeProduct(element.id)"><mat-icon>delete</mat-icon></button></td>
-        </ng-container>
-        
+    <ng-container matColumnDef="price">
+      <th mat-header-cell *matHeaderCellDef>Price</th>
+      <td mat-cell *matCellDef="let element">{{ element.price | currency }}</td>
+    </ng-container>
 
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    </table>
+    <ng-container matColumnDef="total">
+      <th mat-header-cell *matHeaderCellDef>Total</th>
+      <td mat-cell *matCellDef="let element">{{ element.total | currency }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let element">
+        <button
+          mat-flat-button
+          color="accent"
+          (click)="seeProduct(element.product_variant_id)"
+        >
+          See Product
+        </button>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="cross">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-mini-fab color="warn" (click)="removeProduct(element.id)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
 </div>
 
 <div class="totals" *ngIf="cart.total > 0">
-    <h3 id="amount">Products: {{itemsAmount}}</h3>
-    <h3 id="total">Total: {{cart.total | currency}}</h3>
-    <button mat-raised-button color="primary" (click)="buyCart()">Buy Items</button>
+  <h3 id="amount">Products: {{ itemsAmount }}</h3>
+  <h3 id="total">Total: {{ cart.total | currency }}</h3>
+  <button mat-raised-button color="primary" (click)="buyCart()">
+    Buy Items
+  </button>
 </div>

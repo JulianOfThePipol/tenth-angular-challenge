@@ -1,7 +1,9 @@
-# NinthChallenge
+# TenthChallenge
 
-This is a project developed for Applaudo Studios's Trainee Program's Ninth Week Challenge.
-It is a SPA for an e-commerce which comunicates with the Api provided in this week's documentation.
+This is a project developed for Applaudo Studios's Trainee Program's Tenth Week Challenge.
+It's focus is the testing done on the proyect created on the ninth week. It also has new animations for the page changes, and has the animation of the matdialog modified.
+Tests have been added to fullfill all te points required, including tests for the reducers of both ngrx stores. A preloading strategy has also been added.
+The project is a SPA for an e-commerce which comunicates with the Api provided in this week's documentation.
 The webpage consists in three main parts:
 
     The login page, which provides a simple form to sign into the app.
@@ -10,6 +12,7 @@ The webpage consists in three main parts:
 
 The application was made using angular material, and ngrx for state management.
 
+//Notes from the previous week on the core proyect.
 Due to the API's erratic behaviour, currently there is a bug that upon any cart product quantity variation, or cart removal, the item's stock quantity is reduced.*1 
 Eventually, an item can be made to run out of stock without no purchase ever ocurring. The alternatives to these problem where two: 
     Stop using the API alltogether except for data retrieval.
